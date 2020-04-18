@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="c2e1e17d-4f83-478f-86bc-ca5728a77d7e" name="singleVector" url="http://10.1.1.80:8080">
+        <fileTransfer host="singlevector.dedicated.co.za" port="22" rootFolder="/var/data/TheReview" accessType="SFTP" authAgent="true">
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
