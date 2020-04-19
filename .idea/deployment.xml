@@ -5,7 +5,7 @@
       <paths name="singleVector">
         <serverdata>
           <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/var/data/TheReview" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

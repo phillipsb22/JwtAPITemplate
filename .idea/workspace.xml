@@ -2,25 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b299af0-c434-418b-9d43-8caa746595cf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/UserBundle/Controller/AuthenticationController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/UserBundle/Tests/AuthenticationControllerTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/UserBundle/UserBundle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/._.DS_Store" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.test" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Documents/Development/DevSetup.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Documents/Development/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/TheReview.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TheReview.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpunit.xml.dist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +169,7 @@
       <workItem from="1586100002959" duration="2492000" />
       <workItem from="1586526757124" duration="375000" />
       <workItem from="1586677308754" duration="1508000" />
-      <workItem from="1587204892989" duration="5550000" />
+      <workItem from="1587204892989" duration="8746000" />
     </task>
     <servers />
   </component>
@@ -191,10 +177,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1943" y="94" key="#Deployment" timestamp="1587241714206">
+    <state x="1943" y="94" key="#Deployment" timestamp="1587280268559">
       <screen x="1440" y="-101" width="1920" height="1080" />
     </state>
-    <state x="1943" y="94" key="#Deployment/0.0.1440.900/1440.-101.1920.1080@1440.-101.1920.1080" timestamp="1586682826485" />
+    <state x="1943" y="94" key="#Deployment/0.0.1440.900/1440.-101.1920.1080@1440.-101.1920.1080" timestamp="1587280268559" />
     <state x="440" y="190" key="#Deployment/0.0.1680.1050@0.0.1680.1050" timestamp="1586100240691" />
     <state x="1943" y="94" key="#Deployment/0.23.1440.877/1440.-101.1920.1080@1440.-101.1920.1080" timestamp="1587241714206" />
     <state x="2000" y="104" key="#Options" timestamp="1586682806342">
@@ -218,6 +204,10 @@
     </state>
     <state x="2054" y="196" width="692" height="486" key="find.popup/0.0.1440.900/1440.-101.1920.1080@1440.-101.1920.1080" timestamp="1587244558388" />
     <state x="537" y="289" width="605" height="472" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1586100601098" />
+    <state x="2250" y="166" key="ftp.server.browser" timestamp="1587280252389">
+      <screen x="1440" y="-101" width="1920" height="1080" />
+    </state>
+    <state x="2250" y="166" key="ftp.server.browser/0.0.1440.900/1440.-101.1920.1080@1440.-101.1920.1080" timestamp="1587280252389" />
     <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1586102406529">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

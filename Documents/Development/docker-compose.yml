@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  mariadb:
+    image: mariadb
+    volumes:
+      - /var/data/mariaDBData:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: devDbPassword
+      MYSQL_DATABASE: TheReview
+      MYSQL_USER: theReview
+      MYSQL_PASSWORD: reviewPassword
+
+  web:
+    depends_on:
+      - mariadb
+    image: php:7.4-apache
+    volumes:
+      - /var/data/TheReview:/var/www/TheReview
+    container_name: TheReviewImagephp74
+    environment:
+      APACHE_DOCUMENT_ROOT: /var/www/TheReview
