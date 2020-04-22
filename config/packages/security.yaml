@@ -1,7 +1,29 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: { memory: null }
+        users:
+            entity:
+                class: 'App\UserBundle\Entity'
+                property: 'username'
+
+    encoders:
+        App\UserBundle\Entity:
+            algorithm: bcrypt
+
+    role_hierarchy:
+        - ROLE_SUPER_ADMIN:
+              - ROLE_DISTRIBUTOR_USER
+              - ROLE_USER_BASIC
+        - ROLE_DISTRIBUTOR_USER:
+              - ROLE_DISTRIBUTOR_USER
+              - ROLE_DISTRIBUTOR_MENU_USER
+              - ROLE_BASIC_USER
+        - ROLE_DISTRIBUTOR_MENU_USER:
+              - ROLE_DISTRIBUTOR_MENU_USER
+              - ROLE_BASIC_USER
+        - ROLE_BASIC_USER:
+              - ROLE_BASIC_USER
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -16,12 +38,17 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
+        register:
+            pattern:  ^/register
+            stateless: true
+            anonymous: true
+
         login:
-            pattern:  ^/api/login
+            pattern:  ^/login
             stateless: true
             anonymous: true
             json_login:
-                check_path:               /api/login_check
+                check_path:               /login_check
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
 
