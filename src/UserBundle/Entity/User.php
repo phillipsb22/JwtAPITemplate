@@ -17,16 +17,20 @@ use Doctrine\ORM\Mapping as ORM;
 class User implements UserInterface
 {
     /**
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id()
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+     */
+    private $uuid;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="uuid", unique=true)
-     */
-    private $uuid;
 
     /**
      * @ORM\Column(name="username", type="string", length=100, nullable=false)
@@ -34,7 +38,7 @@ class User implements UserInterface
     private $username;
 
     /**
-     * @ORM\Column(name="password", type="string", length="500")
+     * @ORM\Column(name="password", type="string", length=500)
      */
     private $password;
 
@@ -42,6 +46,18 @@ class User implements UserInterface
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
+
+    /**
+     * @var $createdAt \DateTime
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var $updatedAt \DateTime
+     * @ORM\Column(name="updated_at", type="datetime", columnDefinition="DATETIME on update CURRENT_TIMESTAMP")
+     */
+    private $updatedAt;
 
     /**
      * @return array

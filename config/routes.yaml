@@ -3,9 +3,11 @@
 #    controller: App\Controller\DefaultController::index
 
 api_login_check:
-  path: /login_check
+  path: /api/login_check
+  methods:  [POST]
+
 
 register:
-  path: /register
+  path: /api/register
   controller: App\UserBundle\Controller\AuthenticationController::RegisterUserAction
 

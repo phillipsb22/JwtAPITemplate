@@ -3,34 +3,17 @@ security:
     providers:
         users:
             entity:
-                class: 'App\UserBundle\Entity'
+                class: 'App\UserBundle\Entity\User'
                 property: 'username'
 
     encoders:
-        App\UserBundle\Entity:
+        App\UserBundle\Entity\User:
             algorithm: bcrypt
-
-    role_hierarchy:
-        - ROLE_SUPER_ADMIN:
-              - ROLE_DISTRIBUTOR_USER
-              - ROLE_USER_BASIC
-        - ROLE_DISTRIBUTOR_USER:
-              - ROLE_DISTRIBUTOR_USER
-              - ROLE_DISTRIBUTOR_MENU_USER
-              - ROLE_BASIC_USER
-        - ROLE_DISTRIBUTOR_MENU_USER:
-              - ROLE_DISTRIBUTOR_MENU_USER
-              - ROLE_BASIC_USER
-        - ROLE_BASIC_USER:
-              - ROLE_BASIC_USER
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
-            anonymous: lazy
-            provider: users_in_memory
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -39,16 +22,16 @@ security:
             # switch_user: true
 
         register:
-            pattern:  ^/register
+            pattern:  ^/api/register
             stateless: true
             anonymous: true
 
         login:
-            pattern:  ^/login
+            pattern:  ^/api/login
             stateless: true
             anonymous: true
             json_login:
-                check_path:               /login_check
+                check_path:               /api/login_check
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
 
@@ -68,8 +51,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/api/login,  roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login,  roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register,  roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/public, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/v1,    roles: IS_AUTHENTICATED_FULLY }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
