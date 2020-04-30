@@ -37,6 +37,30 @@ $ echo $COMPOSER
 $ export COMPOSER=composer.json
 ```
 
+## Setting up the testing environment 
+Require the fixtures and liip bundle (This has been done already in this project)
+```cmd
+$ composer require --dev doctrine/doctrine-fixtures-bundle
+$ composer require --dev liip/functional-test-bundle:^4.0.0
+$ composer require --dev liip/test-fixtures-bundle:^1.0.0
+``` 
+create a file for the sqlite db in `./var/test.db3`
+```yaml
+# config/packages/test/doctrine.yaml
+doctrine:
+    dbal:
+        driver: 'pdo_sqlite'
+        url: 'sqlite:///%kernel.project_dir%/var/test.db3'
+```
+Create the database
+```cmd 
+$ php app/console doctrine:database:create --env=test
+```
+
+When doing API endpoint tests `use Liip\FunctionalTestBundle\Test\WebTestCase;`
+
+
+
 role_hierarchy:
         - ROLE_SUPER_ADMIN:
               - ROLE_DISTRIBUTOR_USER

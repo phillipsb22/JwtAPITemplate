@@ -13,10 +13,6 @@
         <server name="SHELL_VERBOSITY" value="-1" />
     </php>
 
-    <listeners>
-        <listener class="\DAMA\DoctrineTestBundle\PHPUnit\PHPUnitListener"/>
-    </listeners>
-
     <testsuites>
         <testsuite name="UserTests">
             <directory>src/UserBundle/Tests</directory>

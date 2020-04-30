@@ -4,20 +4,23 @@
 namespace App\UserBundle\Tests;
 
 
-use App\Tests\DatabasePrimer;
+use App\UserBundle\Fixtures\UserFixture;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 use \Symfony\Component\HttpFoundation\Response;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 class AuthenticationControllerTest extends WebTestCase
 {
-//    public function setUp(): void
-//    {
-//        parent::setUp();
-//
-//        self::bootKernel();
-//
-//        DatabasePrimer::prime(self::$kernel);
-//    }
+    use FixturesTrait;
+
+    public function setUp(): void
+    {
+        $this->loadFixtures(
+            [
+                UserFixture::class
+            ]
+        );
+    }
 
     public function testPostRegisterUser()
     {
@@ -35,8 +38,43 @@ class AuthenticationControllerTest extends WebTestCase
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
 
-//    public function testPostLogin()
-//    {
-//        dd('nHere');
-//    }
+    public function testPostRegisterUserIncorrectUsername()
+    {
+        self::ensureKernelShutdown();
+        $client = self::createClient();
+        $client->request(
+            'POST',
+            '/api/register',
+            [
+                'username' => 'testuser',
+                'password' => 'T3stP@ssw0rd'
+            ]
+        );
+    
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $client->getResponse()->getStatusCode());
+    }
+
+    public function testPostLogin()
+    {
+        self::ensureKernelShutdown();
+        $client = self::createClient();
+
+        $data = json_encode(
+            [
+                'username' => 'testFixtureUser@mail.com',
+                'password' => 't3$tP@ssw0rd'
+            ]
+        );
+
+        $client->request(
+            'POST',
+            '/api/login_check',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            $data
+        );
+
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+    }
 }

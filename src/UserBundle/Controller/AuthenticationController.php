@@ -36,7 +36,7 @@ class AuthenticationController extends AbstractController
     public function RegisterUserAction (Request $request, UserPasswordEncoderInterface $encoder)
     {
         if (!UserTools::isValidEmailAddress($request->get('username'))) {
-            throw new \Exception('Please use a valid email address as your username');
+            throw new \Exception('Please use a valid email address as your username', Response::HTTP_BAD_REQUEST);
         }
 
         if (preg_match(self::PASSWORD_REQUIREMENTS, $request->get('password'))) {
