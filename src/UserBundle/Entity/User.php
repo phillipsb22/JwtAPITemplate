@@ -6,12 +6,14 @@ namespace App\UserBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class User
  * @package App\UserBundle\Entity
  * @ORM\Table(name="user")
  * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks
  *
  */
 class User implements UserInterface
@@ -48,16 +50,37 @@ class User implements UserInterface
     private $isActive;
 
     /**
+     * @var $updatedAt \DateTime
+     * @ORM\Column(name="updated_at", type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=true)
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $updatedAt;
+
+    /**
      * @var $createdAt \DateTime
-     * @ORM\Column(name="created_at", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
     /**
-     * @var $updatedAt \DateTime
-     * @ORM\Column(name="updated_at", type="datetime", columnDefinition="DATETIME on update CURRENT_TIMESTAMP")
+     * Gets triggered only on insert
+     * @ORM\PrePersist
      */
-    private $updatedAt;
+    public function onPrePersist()
+    {
+        $this->createdAt = new \DateTime("now");
+    }
+
+    /**
+     * Gets triggered every time on update
+
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new \DateTime("now");
+    }
 
     /**
      * @return array
@@ -159,5 +182,37 @@ class User implements UserInterface
     public function setIsActive($isActive): void
     {
         $this->isActive = $isActive;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt(\DateTime $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 }
