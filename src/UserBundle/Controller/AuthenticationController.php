@@ -6,6 +6,9 @@ namespace App\UserBundle\Controller;
 
 use App\UserBundle\Entity\User;
 use App\UserBundle\Helper\UserTools;
+use App\UtilitiesBundle\ErrorCodes\UserBundleErrorCodes;
+use App\UtilitiesBundle\Exception\UserDataException;
+use App\UtilitiesBundle\Helper\ApiResponse;
 use Doctrine\Persistence\ObjectManager;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,7 +39,7 @@ class AuthenticationController extends AbstractController
     public function RegisterUserAction (Request $request, UserPasswordEncoderInterface $encoder)
     {
         if (!UserTools::isValidEmailAddress($request->get('username'))) {
-            throw new \Exception('Please use a valid email address as your username', Response::HTTP_BAD_REQUEST);
+            throw new UserDataException('Please use a valid email address as your username', Response::HTTP_BAD_REQUEST, UserBundleErrorCodes::INVALID_EMAIL);
         }
 
         if (preg_match(self::PASSWORD_REQUIREMENTS, $request->get('password'))) {
@@ -47,9 +50,11 @@ class AuthenticationController extends AbstractController
             );
 
             if ($user instanceof User) {
-                // Change this to say something else for security purposes
-                // Facebook sends a password change pin to reset password
-                throw new \Exception('Please login');
+                throw new UserDataException(
+                    'User already registered, please login or reset your password',
+                    Response::HTTP_BAD_REQUEST,
+                    Response::HTTP_BAD_REQUEST
+                );
             }
 
             $user = new User();
@@ -60,12 +65,15 @@ class AuthenticationController extends AbstractController
             $this->getEntityManager()->persist($user);
             $this->getEntityManager()->flush();
 
-            return new JsonResponse('User successfully registered', Response::HTTP_OK);
+            return new ApiResponse('User successfully registered');
         }
 
-        throw new \Exception('Complexity of the password is not sufficient, the password must contain: 
+        throw new UserDataException('Complexity of the password is not sufficient, the password must contain: 
             a password length must be greater than or equal to 8, one or more uppercase characters, 
-            one or more lowercase characters, one or more numeric values and one or more special characters');
+            one or more lowercase characters, one or more numeric values and one or more special characters',
+            Response::HTTP_BAD_REQUEST,
+            UserBundleErrorCodes::PASSWORD_COMPLEXITY_ERROR
+        );
     }
 
     /**
