@@ -21,10 +21,11 @@ controllers:
 This creates the tables and columns that may have been added. <br>
 Use this as a reference https://symfony.com/doc/4.4/doctrine.html <br>
 Always run this after altering an entity or creating an entity.
+NOTE: If you are creating the database you only need to run the migration you don't need to make them
 ```
 $ php bin/console make:migration
 ```
-The run the migration
+Then run the migration
 ```
 $ php bin/console doctrine:migrations:migrate
 ```
@@ -58,19 +59,3 @@ $ php app/console doctrine:database:create --env=test
 ```
 
 When doing API endpoint tests `use Liip\FunctionalTestBundle\Test\WebTestCase;`
-
-
-
-role_hierarchy:
-        - ROLE_SUPER_ADMIN:
-              - ROLE_DISTRIBUTOR_USER
-              - ROLE_USER_BASIC
-        - ROLE_DISTRIBUTOR_USER:
-              - ROLE_DISTRIBUTOR_USER
-              - ROLE_DISTRIBUTOR_MENU_USER
-              - ROLE_BASIC_USER
-        - ROLE_DISTRIBUTOR_MENU_USER:
-              - ROLE_DISTRIBUTOR_MENU_USER
-              - ROLE_BASIC_USER
-        - ROLE_BASIC_USER:
-              - ROLE_BASIC_USER
