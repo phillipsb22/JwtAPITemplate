@@ -42,15 +42,68 @@ class AuthenticationControllerTest extends WebTestCase
     {
         self::ensureKernelShutdown();
         $client = self::createClient();
+        $data = json_encode(
+            [
+                'username' => 'testinvalidUsername',
+                'password' => 't3$tP@ssw0rd'
+            ]
+        );
+
         $client->request(
             'POST',
             '/api/register',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            $data
+        );
+
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $client->getResponse()->getStatusCode());
+    }
+
+    public function testPostRegisterUserInvalidPasswordComplexity()
+    {
+        self::ensureKernelShutdown();
+        $client = self::createClient();
+        $data = json_encode(
             [
-                'username' => 'testuser',
-                'password' => 'T3stP@ssw0rd'
+                'username' => 'testpassword@mail.com',
+                'password' => 'testPassword'
             ]
         );
-    
+
+        $client->request(
+            'POST',
+            '/api/register',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            $data
+        );
+
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $client->getResponse()->getStatusCode());
+    }
+
+    public function testPostRegisterRegisteredUser()
+    {
+        self::ensureKernelShutdown();
+        $client = self::createClient();
+        $data = json_encode(
+            [
+                'username' => 'testFixtureUser@mail.com',
+                'password' => 't3$tP@ssw0rd'
+            ]
+        );
+
+        $client->request(
+            'POST',
+            '/api/register',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            $data
+        );
+
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $client->getResponse()->getStatusCode());
     }
 
