@@ -16,7 +16,7 @@ Authorisation is not included however for basic user authorisation create a role
   role_hierarchy:
         ROLE_USER:             [ROLE_USER]
 ```
-then add the following to the User Entity.
+then add the following to the User Entity and don't forget to make and run migrations
 
 ```php
     /**
